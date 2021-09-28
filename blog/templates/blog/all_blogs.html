@@ -1,8 +1,8 @@
 {% load staticfiles %}
 
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -53,7 +53,7 @@
         <a class="nav-link" href="https://www.linkedin.com/in/alexandru-m-popa-26baa4207/">LinkedIn</a>
         <a class="nav-link" href="https://github.com/ealpopa">GitHub</a>
         <a class="nav-link" href="{% static 'CV_Alexandru_Mihai_Popa_0921.pdf' %}">Resume</a>
-        <a class="nav-link" href="{% url 'all_blogs' %}">Blog</a>
+        <a class="nav-link active" href="{% url 'all_blogs' %}">Blog</a>
       </div>
     </div>
   </div>
@@ -61,49 +61,35 @@
 </header>
 
 <main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Hi, I'm Alex</h1>
-        <p class="lead text-muted">I am a telecom networks professional with over 13 years of experience working with Europe's largest telecom operators, period during which I have occupied roles such as technical consultant/ solution architect, business owner, technical trainer, network engineer, technical coordinator, project owner/ coordinator and team leader.</p>
-        <p class="lead text-muted">I'm looking to transition into software engineering roles.</p>
-        <img width="500" src="{% static '1631233644489.jpg' %}">
-        <p>
-          <a href="mailto:popa.mihai.alexandru@gmail.com" class="btn btn-primary my-2">Contact me</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <h1 class="text-center pt-3">Welcome to Alex's blog</h1>
+        <br/>
+        <br/>
+        <h2>Latest posts</h2>
+        <hr/>
 
-  {% for job in jobs.all %}
+        {% for blog in blogs.all %}
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img class="bd-placeholder-img card-img-top" height="225" src="{{ job.image.url }}"/>
-            <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
-            </div>
-          </div>
-        </div>
+        <a href="{% url 'details' blog.id %}"><h3>{{ blog.title }}</h3></a>
+        <p>{{ blog.pub_date }}</p>
+        <img class="img-fluid" src="{{ blog.image.url }}" width=768px">
+        <p>{{ blog.get_preview }}</p>
+        <br/>
 
-  {% endfor %}
+        {% endfor %}
 
-      </div>
     </div>
-  </div>
-
-
 </main>
 
-    <footer class="text-muted py-5">
-      <div class="container text-center">
-        <p>(c) Alexandru Mihai Popa {% now "Y" %}</p>
-      </div>
-    </footer>
+<footer class="text-muted py-5">
+  <div class="container text-center">
+    <p>(c) Alexandru Mihai Popa {% now "Y" %}</p>
+  </div>
+</footer>
+
+
     <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+      
   </body>
 </html>
